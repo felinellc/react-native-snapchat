@@ -1,0 +1,14 @@
+{
+  "name": "react-native-snapchat",
+  "version": "1.0.0",
+  "description": "A React Native library for Snapchat's SnapSDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "Sam Gehly",
+  "license": "MIT"
+}
