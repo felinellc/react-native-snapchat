@@ -12,6 +12,8 @@
 		C10B5F8C21D4651600E9B011 /* SCSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10B5F8821D4651600E9B011 /* SCSDKCoreKit.framework */; };
 		C10B5F8D21D4651600E9B011 /* SCSDKCreativeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10B5F8921D4651600E9B011 /* SCSDKCreativeKit.framework */; };
 		C10B5F8E21D4651600E9B011 /* SCSDKBitmojiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10B5F8A21D4651600E9B011 /* SCSDKBitmojiKit.framework */; };
+		C1FDA2C523299CA100393439 /* BitmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FDA2C023299CA000393439 /* BitmojiPickerView.swift */; };
+		C1FDA2C623299CA100393439 /* BitmojiPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FDA2C423299CA100393439 /* BitmojiPicker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,12 @@
 		C10B5F8921D4651600E9B011 /* SCSDKCreativeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SCSDKCreativeKit.framework; sourceTree = "<group>"; };
 		C10B5F8A21D4651600E9B011 /* SCSDKBitmojiKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SCSDKBitmojiKit.framework; sourceTree = "<group>"; };
 		C196892921D4181E004620D5 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		C1FDA2BF23299CA000393439 /* RNSnapSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNSnapSDK-Bridging-Header.h"; sourceTree = "<group>"; };
+		C1FDA2C023299CA000393439 /* BitmojiPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitmojiPickerView.swift; sourceTree = "<group>"; };
+		C1FDA2C123299CA000393439 /* BitmojiPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmojiPicker.h; sourceTree = "<group>"; };
+		C1FDA2C223299CA000393439 /* RNSnapSDK */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RNSnapSDK; sourceTree = "<group>"; };
+		C1FDA2C323299CA000393439 /* RNSnapSDK-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNSnapSDK-Bridging-Header.h"; sourceTree = "<group>"; };
+		C1FDA2C423299CA100393439 /* BitmojiPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitmojiPicker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,11 +186,17 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				C1FDA2C123299CA000393439 /* BitmojiPicker.h */,
+				C1FDA2C423299CA100393439 /* BitmojiPicker.m */,
+				C1FDA2C023299CA000393439 /* BitmojiPickerView.swift */,
+				C1FDA2C223299CA000393439 /* RNSnapSDK */,
+				C1FDA2C323299CA000393439 /* RNSnapSDK-Bridging-Header.h */,
 				C10B5F8621D4650300E9B011 /* Libraries */,
 				B3E7B5881CC2AC0600A0062D /* RNSnapSDK.h */,
 				B3E7B5891CC2AC0600A0062D /* RNSnapSDK.m */,
 				C196892921D4181E004620D5 /* React.xcodeproj */,
 				134814211AA4EA7D00B7C361 /* Products */,
+				C1FDA2BF23299CA000393439 /* RNSnapSDK-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -251,6 +265,7 @@
 				TargetAttributes = {
 					58B511DA1A9E6C8500147676 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 1030;
 					};
 				};
 			};
@@ -399,6 +414,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3E7B58A1CC2AC0600A0062D /* RNSnapSDK.m in Sources */,
+				C1FDA2C623299CA100393439 /* BitmojiPicker.m in Sources */,
+				C1FDA2C523299CA100393439 /* BitmojiPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +506,7 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../ios/Frameworks/**",
 					"$(PROJECT_DIR)/Libraries",
@@ -499,16 +517,21 @@
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNSnapSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNSnapSDK-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../ios/Frameworks/**",
 					"$(PROJECT_DIR)/Libraries",
@@ -519,10 +542,13 @@
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNSnapSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNSnapSDK-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

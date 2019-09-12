@@ -21,6 +21,43 @@
 
 RCT_EXPORT_MODULE()
 
+
+RCT_EXPORT_METHOD(login)
+{
+    
+    [SCSDKLoginClient loginFromViewController:[UIApplication sharedApplication].delegate.window.rootViewController completion:^(BOOL success, NSError * _Nullable error) {
+    }];
+}
+
+RCT_EXPORT_METHOD(getUserData: (RCTPromiseResolveBlock)resolve (RCTPromiseRejectBlock)reject)
+{
+    
+    NSString *graphQLQuery = @"{me{displayName, bitmoji{avatar}}}";
+    
+    NSDictionary *variables = @{@"page": @"bitmoji"};
+    
+    [SCSDKLoginClient fetchUserDataWithQuery:graphQLQuery
+        variables:variables
+        success:^(NSDictionary *resources) {
+            NSDictionary *data = resources[@"data"];
+            NSDictionary *me = data[@"me"];
+            NSString *displayName = me[@"displayName"];
+            NSDictionary *bitmoji = me[@"bitmoji"];
+            NSString *bitmojiAvatarUrl = bitmoji[@"avatar"];
+            
+            resolve(data);
+        } failure:^(NSError * error, BOOL isUserLoggedOut) {
+            reject(error);
+        }];
+}
+
+
+RCT_EXPORT_METHOD(authenticateDeepLink: (NSString *)url)
+{
+    NSURL *finalUrl = [NSURL URLWithString:url];
+    [SCSDKLoginClient application:[UIApplication sharedApplication] openURL:finalUrl options:[NSMutableDictionary dictionary]];
+}
+
 RCT_EXPORT_METHOD(shareSticker:(NSString *)image options:(NSDictionary *)options)
 {
     SCSDKSnapSticker *source = NULL;
