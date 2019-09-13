@@ -32,7 +32,7 @@ RCT_EXPORT_METHOD(login)
 RCT_EXPORT_METHOD(logout: (RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
     [SCSDKLoginClient unlinkCurrentSessionWithCompletion:^(BOOL success) {
-        resolve();
+        resolve(NULL);
     }];
 }
 
