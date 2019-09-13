@@ -29,10 +29,17 @@ RCT_EXPORT_METHOD(login)
     }];
 }
 
-RCT_EXPORT_METHOD(getUserData: (RCTPromiseResolveBlock)resolve (RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(logout: (RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+    [SCSDKLoginClient unlinkCurrentSessionWithCompletion:^(BOOL success) {
+        resolve();
+    }];
+}
+
+RCT_EXPORT_METHOD(getUserData: (RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
     
-    NSString *graphQLQuery = @"{me{displayName, bitmoji{avatar}}}";
+    NSString *graphQLQuery = @"{me{externalId, displayName, bitmoji{avatar}}}";
     
     NSDictionary *variables = @{@"page": @"bitmoji"};
     
@@ -47,7 +54,7 @@ RCT_EXPORT_METHOD(getUserData: (RCTPromiseResolveBlock)resolve (RCTPromiseReject
             
             resolve(data);
         } failure:^(NSError * error, BOOL isUserLoggedOut) {
-            reject(error);
+            reject(@"error", @"ERROR", error);
         }];
 }
 
