@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B3E7B58A1CC2AC0600A0062D /* RNSnapSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNSnapSDK.m */; };
-		C10B5F8B21D4651600E9B011 /* SCSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10B5F8721D4651600E9B011 /* SCSDKLoginKit.framework */; };
-		C10B5F8C21D4651600E9B011 /* SCSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10B5F8821D4651600E9B011 /* SCSDKCoreKit.framework */; };
-		C10B5F8D21D4651600E9B011 /* SCSDKCreativeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10B5F8921D4651600E9B011 /* SCSDKCreativeKit.framework */; };
-		C10B5F8E21D4651600E9B011 /* SCSDKBitmojiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10B5F8A21D4651600E9B011 /* SCSDKBitmojiKit.framework */; };
 		C1FDA2C523299CA100393439 /* BitmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FDA2C023299CA000393439 /* BitmojiPickerView.swift */; };
 		C1FDA2C623299CA100393439 /* BitmojiPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FDA2C423299CA100393439 /* BitmojiPicker.m */; };
 /* End PBXBuildFile section */
@@ -32,10 +28,6 @@
 		134814201AA4EA6300B7C361 /* libRNSnapSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSnapSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5881CC2AC0600A0062D /* RNSnapSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSnapSDK.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNSnapSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSnapSDK.m; sourceTree = "<group>"; };
-		C10B5F8721D4651600E9B011 /* SCSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SCSDKLoginKit.framework; sourceTree = "<group>"; };
-		C10B5F8821D4651600E9B011 /* SCSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SCSDKCoreKit.framework; sourceTree = "<group>"; };
-		C10B5F8921D4651600E9B011 /* SCSDKCreativeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SCSDKCreativeKit.framework; sourceTree = "<group>"; };
-		C10B5F8A21D4651600E9B011 /* SCSDKBitmojiKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SCSDKBitmojiKit.framework; sourceTree = "<group>"; };
 		C1FDA2BF23299CA000393439 /* RNSnapSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNSnapSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		C1FDA2C023299CA000393439 /* BitmojiPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitmojiPickerView.swift; sourceTree = "<group>"; };
 		C1FDA2C123299CA000393439 /* BitmojiPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmojiPicker.h; sourceTree = "<group>"; };
@@ -48,10 +40,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C10B5F8B21D4651600E9B011 /* SCSDKLoginKit.framework in Frameworks */,
-				C10B5F8C21D4651600E9B011 /* SCSDKCoreKit.framework in Frameworks */,
-				C10B5F8D21D4651600E9B011 /* SCSDKCreativeKit.framework in Frameworks */,
-				C10B5F8E21D4651600E9B011 /* SCSDKBitmojiKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,23 +61,11 @@
 				C1FDA2C423299CA100393439 /* BitmojiPicker.m */,
 				C1FDA2C023299CA000393439 /* BitmojiPickerView.swift */,
 				C1FDA2C323299CA000393439 /* RNSnapSDK-Bridging-Header.h */,
-				C10B5F8621D4650300E9B011 /* Libraries */,
 				B3E7B5881CC2AC0600A0062D /* RNSnapSDK.h */,
 				B3E7B5891CC2AC0600A0062D /* RNSnapSDK.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				C1FDA2BF23299CA000393439 /* RNSnapSDK-Bridging-Header.h */,
 			);
-			sourceTree = "<group>";
-		};
-		C10B5F8621D4650300E9B011 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				C10B5F8A21D4651600E9B011 /* SCSDKBitmojiKit.framework */,
-				C10B5F8821D4651600E9B011 /* SCSDKCoreKit.framework */,
-				C10B5F8921D4651600E9B011 /* SCSDKCreativeKit.framework */,
-				C10B5F8721D4651600E9B011 /* SCSDKLoginKit.framework */,
-			);
-			path = Libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,10 +221,6 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/../../../ios/Frameworks/**",
-					"$(PROJECT_DIR)/Libraries",
-				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -271,10 +243,6 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/../../../ios/Frameworks/**",
-					"$(PROJECT_DIR)/Libraries",
-				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
