@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <React/RCTUIManager.h>
-#import "RNSnapSDK-Swift.h"
+#import "react_native_snapchat-Swift.h"
 #import "BitmojiPicker.h"
 
 @implementation BitmojiPickerManager
