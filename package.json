@@ -9,6 +9,9 @@
   "keywords": [
     "react-native"
   ],
+  "repository": {
+    "url": "https://github.com/felinellc/react-native-snapchat"
+  },
   "author": "Sam Gehly",
   "license": "MIT"
 }
