@@ -21,7 +21,7 @@ public class BitmojiPickerView: UIView, SCSDKBitmojiStickerPickerViewControllerD
     
     weak var pickerViewController: SCSDKBitmojiStickerPickerViewController?
     
-    var config: NSDictionary = [:] {
+    @objc var config: NSDictionary = [:] {
         didSet {
             setNeedsLayout()
         }
@@ -50,10 +50,38 @@ public class BitmojiPickerView: UIView, SCSDKBitmojiStickerPickerViewControllerD
                 return
         }
         
-        let config = SCSDKBitmojiStickerPickerConfig();
+        let configBuilder = SCSDKBitmojiStickerPickerConfigBuilder()
         
+        let theme = config.value(forKey: "theme");
+        if(theme != nil){
+            
+            if(theme as! String == "custom"){
+                let themeBuilder = SCSDKBitmojiStickerPickerThemeBuilder();
+                themeBuilder.withBackgroundColor(UIColor.init(white: 1, alpha: 0))
+                themeBuilder.withBorderColor(UIColor.init(white: 1, alpha: 0))
+                themeBuilder.withSearchColor(UIColor.init(white: 1, alpha: 1))
+                themeBuilder.withSubtextColor(UIColor.init(white: 1, alpha: 1))
+                themeBuilder.withTitleTextColor(UIColor.init(white: 1, alpha: 1))
+                configBuilder.withTheme(themeBuilder.build());
+                
+            }else{
+                configBuilder.withTheme(theme as! String == "light" ? .light : .dark)
+            }
+        }
         
-        let vc = SCSDKBitmojiStickerPickerViewController(config: config);
+       
+        
+        let showSearch = config.value(forKey: "showSearch");
+        if(showSearch != nil){
+            configBuilder.withShowSearchBar(showSearch as! Bool || false)
+        }
+        
+        let showPills = config.value(forKey: "showPills");
+        if(showPills != nil){
+            configBuilder.withShowSearchPills(showPills as! Bool || false)
+        }
+        
+        let vc = SCSDKBitmojiStickerPickerViewController(config: configBuilder.build());
         
         
         parentVC.addChild(vc!)
