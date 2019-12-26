@@ -1,5 +1,5 @@
 import React from 'react';
-import { NativeModules, requireNativeComponent } from 'react-native';
+import { NativeModules, requireNativeComponent, NativeEventEmitter } from 'react-native';
 
 const { RNSnapSDK } = NativeModules;
 
@@ -10,10 +10,16 @@ class BitmojiPicker extends React.Component {
   }
 }
 
-const BitmojiPickerRaw = requireNativeComponent('BitmojiPicker', BitmojiPicker);
+if(!global.bitmojiPickerRegistered){
+	const BitmojiPickerRaw = requireNativeComponent('BitmojiPicker', BitmojiPicker);
+	global.bitmojiPickerRegistered = true;
+	RNSnapSDK.BitmojiPicker = BitmojiPickerRaw
+}
 
 
-RNSnapSDK.BitmojiPicker = BitmojiPickerRaw
+RNSnapSDK.initialize();
+
+RNSnapSDK.EventEmitter = new NativeEventEmitter(RNSnapSDK);
 
 
 export default RNSnapSDK;
