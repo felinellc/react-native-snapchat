@@ -70,16 +70,15 @@ RCT_EXPORT_METHOD(login)
 
 RCT_EXPORT_METHOD(logout: (RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    [SCSDKLoginClient unlinkAllSessionsWithCompletion:^(BOOL success) {
-        NSLog(@"Logoout %s", success ? "true" : "false");
-        resolve(NULL);
-    }];
+    [SCSDKLoginClient clearToken];
+    resolve(NULL);
 }
 
 
 RCT_EXPORT_METHOD(getAccessToken: (RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    [SCSDKLoginClient getAccessTokenWithCompletion:^(NSString* accessToken, NSError* error){
+    [SCSDKLoginClient refreshAccessTokenWithCompletion:^(NSString * _Nullable accessToken, NSError *_Nullable error){
+
         if(accessToken != nil){
              NSLog(@"%@", accessToken);
             resolve(accessToken);
@@ -93,11 +92,11 @@ RCT_EXPORT_METHOD(getAccessToken: (RCTPromiseResolveBlock)resolve rejecter:(RCTP
 
 RCT_EXPORT_METHOD(getUserData: (RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    
+
     NSString *graphQLQuery = @"{me{externalId, displayName, bitmoji{avatar}}}";
-    
+
     NSDictionary *variables = @{@"page": @"bitmoji"};
-    
+
     [SCSDKLoginClient fetchUserDataWithQuery:graphQLQuery
         variables:variables
         success:^(NSDictionary *resources) {
@@ -106,7 +105,7 @@ RCT_EXPORT_METHOD(getUserData: (RCTPromiseResolveBlock)resolve rejecter:(RCTProm
         } failure:^(NSError * error, BOOL isUserLoggedOut) {
             NSLog(@"%@",[error localizedDescription]);
             NSLog(@" %s", isUserLoggedOut ? "true" : "false");
-            
+
             if(isUserLoggedOut){
                  NSLog(@"Fuck My Shit Up");
                 [SCSDKLoginClient loginFromViewController:[UIApplication sharedApplication].delegate.window.rootViewController completion:^(BOOL success, NSError * _Nullable error) {
@@ -123,23 +122,23 @@ RCT_EXPORT_METHOD(authenticateDeepLink: (NSString *)url)
 {
     NSURL *finalUrl = [NSURL URLWithString:url];
     saved = finalUrl;
-    
+
     [SCSDKLoginClient application:[UIApplication sharedApplication] openURL:finalUrl options:[NSMutableDictionary dictionary]];
-    
+
     [self initialize];
 }
 
 RCT_EXPORT_METHOD(shareSticker:(NSString *)image options:(NSDictionary *)options)
 {
     SCSDKSnapSticker *source = NULL;
-    
+
     RCTLogInfo(@"[RNSnapSDK] Generating Sticker...");
-    
+
     if([image rangeOfString:@"data:image"].location == 0){
         RCTLogInfo(@"[RNSnapSDK] Using Base64 Image...");
-        
+
         NSArray *array = [image componentsSeparatedByString:@","];
-        
+
         UIImage *imageFinal = [self decodeBase64ToImage:array[1]];
         source = [[SCSDKSnapSticker alloc] initWithStickerImage:imageFinal];
     }else if([image rangeOfString:@"http"].location == 0){
@@ -150,45 +149,45 @@ RCT_EXPORT_METHOD(shareSticker:(NSString *)image options:(NSDictionary *)options
         RCTLogError(@"[RNSnapSDK] shareSticker only supports URLs and Base64 Data URIs");
         return;
     }
-    
+
     if([options objectForKey:@"width"] != nil){
         CGFloat width = [[options objectForKey:@"width"] floatValue];
         [source setWidth:width];
     }
-    
+
     if([options objectForKey:@"height"] != nil){
         CGFloat height = [[options objectForKey:@"height"] floatValue];
         [source setHeight:height];
     }
-    
+
     if([options objectForKey:@"rotation"] != nil){
         CGFloat rotation = [[options objectForKey:@"rotation"] floatValue];
         [source setRotation:rotation];
     }
-    
+
     if([options objectForKey:@"posX"] != nil){
         CGFloat posX = [[options objectForKey:@"posX"] floatValue];
         [source setPosX:posX];
     }
-    
+
     if([options objectForKey:@"posY"] != nil){
         CGFloat posY = [[options objectForKey:@"posY"] floatValue];
         [source setPosY:posY];
     }
-    
-    
+
+
     SCSDKNoSnapContent *content = [[SCSDKNoSnapContent alloc] init];
-    
+
     [content setSticker:source];
-    
+
     if([options objectForKey:@"caption"] != nil){
         [content setCaption:[options objectForKey:@"caption"]];
     }
-    
+
     if([options objectForKey:@"attachment"] != nil){
         [content setAttachmentUrl:[options objectForKey:@"attachment"]];
     }
-    
+
     SCSDKSnapAPI *api = [[SCSDKSnapAPI alloc] initWithContent:content];
     [api startSnappingWithCompletionHandler:^(NSError *error) {
         if(error != nil){
